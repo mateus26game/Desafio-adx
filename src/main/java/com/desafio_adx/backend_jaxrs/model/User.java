@@ -25,17 +25,24 @@ public class User {
     @Column(nullable = false)
     private String duracao;
 
+    @Column(nullable = false, unique = true)
+    private String username;
+
+    @Column(nullable = false)
+    private String password;
+
     public User() {}
 
-    public User(String titulo, String genero, String descricao, String dataDeLancamento,String duracao) {
+    public User(String titulo, String genero, String descricao, String dataDeLancamento, String duracao, String username, String password) {
         this.titulo = titulo;
         this.genero = genero;
         this.descricao = descricao;
         this.dataDeLancamento = dataDeLancamento;
         this.duracao = duracao;
+        this.username = username;
+        this.password = password;
     }
 
-    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -44,10 +51,13 @@ public class User {
         this.id = id;
     }
 
+    public String getDuracao() {
+        return duracao;
+    }
 
-    public  String getDuracao(){return duracao;}
-    public void setDuracao(String duracao) {this.duracao = duracao;}
-
+    public void setDuracao(String duracao) {
+        this.duracao = duracao;
+    }
 
     public String getTitulo() {
         return titulo;
@@ -79,5 +89,21 @@ public class User {
 
     public void setDataDeLancamento(String dataDeLancamento) {
         this.dataDeLancamento = dataDeLancamento;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

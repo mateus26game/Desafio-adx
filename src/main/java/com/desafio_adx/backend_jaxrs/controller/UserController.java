@@ -14,7 +14,6 @@ import java.util.List;
 @Path("/users")
 public class UserController {
 
-
     @Autowired
     private UserService userService;
 
@@ -62,6 +61,23 @@ public class UserController {
         }
     }
 
+    // Endpoint de login
+    @Path("/login")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response login(User loginUser) {
+        // Validando o usuário e senha
+        boolean isAuthenticated = userService.authenticate(loginUser.getUsername(), loginUser.getPassword());
 
-
+        if (isAuthenticated) {
+            // Se o login for bem-sucedido, retorna status de sucesso
+            return Response.ok().entity("{ \"status\": \"success\" }").build();
+        } else {
+            // Se não, retorna erro de autenticação
+            return Response.status(Response.Status.UNAUTHORIZED)
+                    .entity("{ \"status\": \"error\", \"message\": \"Usuário ou senha inválidos\" }")
+                    .build();
+        }
+    }
 }

@@ -1,7 +1,6 @@
 package com.desafio_adx.backend_jaxrs.service;
 
 import com.desafio_adx.backend_jaxrs.model.User;
-import com.desafio_adx.backend_jaxrs.repositorery.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +11,7 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private com.desafio_adx.backend_jaxrs.repository.UserRepository userRepository;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -43,5 +42,12 @@ public class UserService {
             return true;
         }
         return false;
+    }
+
+    public boolean authenticate(String username, String password) {
+
+        Optional<User> user = userRepository.findByUsername(username);
+
+        return user.isPresent() && user.get().getPassword().equals(password);
     }
 }
