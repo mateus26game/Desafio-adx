@@ -1,25 +1,41 @@
 package com.desafio_adx.backend_jaxrs.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String titulo;
+
+    @Column(nullable = false)
     private String genero;
-    private String duracao;
+
+    @Column(nullable = false)
     private String descricao;
+
+    @Column(nullable = false)
     private String dataDeLancamento;
+
+    @Column(nullable = false)
+    private String duracao;
 
     public User() {}
 
-    public User(Long id, String titulo, String genero, String duracao, String descricao, String dataDeLancamento) {
-        this.id = id;
+    public User(String titulo, String genero, String descricao, String dataDeLancamento,String duracao) {
         this.titulo = titulo;
         this.genero = genero;
-        this.duracao = duracao;
         this.descricao = descricao;
         this.dataDeLancamento = dataDeLancamento;
+        this.duracao = duracao;
     }
 
+    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -27,6 +43,11 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
+
+
+    public  String getDuracao(){return duracao;}
+    public void setDuracao(String duracao) {this.duracao = duracao;}
+
 
     public String getTitulo() {
         return titulo;
@@ -42,14 +63,6 @@ public class User {
 
     public void setGenero(String genero) {
         this.genero = genero;
-    }
-
-    public String getDuracao() {
-        return duracao;
-    }
-
-    public void setDuracao(String duracao) {
-        this.duracao = duracao;
     }
 
     public String getDescricao() {
